@@ -1,0 +1,46 @@
+golemio:
+  api_url: 'https://api.golemio.cz/v2/pid/departureboards'
+
+zivyobraz:
+  api_base_url: 'https://in.zivyobraz.eu/'
+
+# Comments taken from
+# https://api.golemio.cz/pid/docs/openapi/#/%F0%9F%95%90%20Public%20Vehicle%20Positions%20(experimental)/get_public_vehiclepositions
+departure_settings:
+  #  Get result by GTFS stop_id. Can be used to retrive individual stops and to separate departures of Prague and
+  #  intercity routes, even if they depart from the same physical stop. A list of GTFS stops can be found in stops.txt
+  #  file of the GTFS feed
+  # - required
+  ids: [ 'U1935Z1P', 'U1935Z1' ]
+  # Set the start of interval from which to retrieve departures. Positive numbers are set in past relative to the time
+  # of request or timeFrom timestamp, negative numbers set the start in the future. Use to compensate for walking
+  # distance to a stop. Default is set to 0. Maximum value is 30 because of implemented data retention.
+  minutes_before: 0
+  # Set the end of interval from which to retrieve departures. Positive numbers are set in future relative to the time
+  # of request or timeFrom timestamp, negative are in the past. The sum of minutesBefore and minutesAfter must be larger
+  # than zero. Default is set to 180.
+  minutes_after: 120
+  # When selecting a node by name, when true, will include metro and/or train stops that are a member of the same node.
+  # I.e. when querying Na Knížecí, setting this to true will add the metro station Anděl to results as well because
+  # both have the same ASW node number 1040.
+  include_metro_trains: false
+  # Enrich departures with vehicle air condition information. Setting to false will force all items to be null. Useful
+  # for disabling the indication of air condition during cold season.
+  air_condition: true
+  # Preferred timezone offset as defined in the IANA Time zone database in the form of Country/City (use an URL encoded
+  # slash sign %2F or use an underscore _ symbol), default is Europe/Prague
+  preferred_timezone: 'Europe_Prague'
+  # Valid entries: departures (default), arrivals, mixed. Set how to handle behaviour in end stops. departures
+  # (default) returns all connections that depart from selected stops (does not return connections for which it is the
+  # final stop). arrivals returns all connections that arrive into the stops (does not return connections for which it
+  # is the first stop). mixed returns everything. Use arrivals to create dedicated arrival boards. Use departures for
+  # all other cases. Using mixed is not recomended as departures of adjoined routes will be returned twice.
+  mode: 'departures'
+  # Valid entries: real (default), timetable. Order results by predicted time including trip delay or by timetable time
+  order: 'real'
+  filter_value: 'none'
+  # Valid entries: canceled, atStop, untracked. Skips trips with these attributes. Use multiple rules with
+  # &skip[]=cancelled&skip[]=atStop query parameter array form.
+  skip: 'canceled'
+  max_entries: 8
+  ignore: [ "Beroun" ]
