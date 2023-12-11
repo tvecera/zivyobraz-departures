@@ -98,7 +98,7 @@ loaded_config = load_config(args.config)
 
 # Extracting settings from the config
 GOLEMIO_API_URL = loaded_config['golemio']['api_url']
-ZIVYOBLAZ_API_BASE_URL = loaded_config['zivyobraz']['api_base_url']
+ZIVYOBRAZ_API_BASE_URL = loaded_config['zivyobraz']['api_base_url']
 DEPARTURE_SETTINGS = loaded_config['departure_settings']
 
 
@@ -171,14 +171,14 @@ def process_and_send_departures(departures):
             headsign = '.....'
 
         params = {
-            'import_key': os.getenv('ZIVYOBLAZ_API_IMPORT_KEY'),
+            'import_key': os.getenv('ZIVYOBRAZ_API_IMPORT_KEY'),
             f'departures.{i}.route': route,
             f'departures.{i}.arrival': arrival,
             f'departures.{i}.delay': delay,
             f'departures.{i}.headsign': headsign
         }
 
-        full_url = f"{ZIVYOBLAZ_API_BASE_URL}?{urlencode(params)}"
+        full_url = f"{ZIVYOBRAZ_API_BASE_URL}?{urlencode(params)}"
         send_response = requests.get(full_url)
 
         logging.info(f"Sending import {i}: Route: {params[f'departures.{i}.route']}, Arrival: "

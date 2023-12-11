@@ -25,14 +25,14 @@ To run the script using Docker on a Raspberry Pi:
    ```
    set +o history
    export GOLEMIO_API_ACCESS_TOKEN=eyJhbG...
-   export ZIVYOBLAZ_API_IMPORT_KEY=aNO...
+   export ZIVYOBRAZ_API_IMPORT_KEY=aNO...
    set -o history
    ```
 
 4. In the `zivyobraz-departures` directory, run the Docker container using the command:
 
    ```
-   docker run -d --name departures --restart=always -e GOLEMIO_API_ACCESS_TOKEN=$GOLEMIO_API_ACCESS_TOKEN -e ZIVYOBLAZ_API_IMPORT_KEY=$ZIVYOBLAZ_API_IMPORT_KEY -v ./config:/usr/src/app/config -v ./logs:/usr/src/app/logs ghcr.io/tvecera/zivyobraz-departures:$VERSION
+   docker run -d --name departures --restart=always -e GOLEMIO_API_ACCESS_TOKEN=$GOLEMIO_API_ACCESS_TOKEN -e ZIVYOBRAZ_API_IMPORT_KEY=$ZIVYOBRAZ_API_IMPORT_KEY -v ./config:/usr/src/app/config -v ./logs:/usr/src/app/logs ghcr.io/tvecera/zivyobraz-departures:$VERSION
    ```
 
 ## Building and Running Your Own Local Docker Image
@@ -49,12 +49,12 @@ To run the script using Docker on a Raspberry Pi:
    ```
    set +o history
    export GOLEMIO_API_ACCESS_TOKEN=eyJhbG...
-   export ZIVYOBLAZ_API_IMPORT_KEY=aNO...
+   export ZIVYOBRAZ_API_IMPORT_KEY=aNO...
    set -o history
    ```
 4. Run the Docker container:
    ```
-   sudo docker run -d --name departures --restart=always -e GOLEMIO_API_ACCESS_TOKEN=$GOLEMIO_API_ACCESS_TOKEN -e ZIVYOBLAZ_API_IMPORT_KEY=$ZIVYOBLAZ_API_IMPORT_KEY -v ./config:/usr/src/app/config -v ./logs:/usr/src/app/logs departures:latest
+   sudo docker run -d --name departures --restart=always -e GOLEMIO_API_ACCESS_TOKEN=$GOLEMIO_API_ACCESS_TOKEN -e ZIVYOBRAZ_API_IMPORT_KEY=$ZIVYOBRAZ_API_IMPORT_KEY -v ./config:/usr/src/app/config -v ./logs:/usr/src/app/logs departures:latest
    ```
 
 ## Links
