@@ -159,9 +159,14 @@ def process_and_send_departures(departures):
 
         if departure:
             route = departure.get('route', {}).get('short_name', 'N/A')
-            arrival = departure.get('arrival_timestamp', {}).get('scheduled', 'T+00:00').split('T')[1].split('+')[0][:5]
-            delay = departure.get('delay', {}).get('minutes', 0) if departure.get('delay', {}).get('is_available',
-                                                                                                   False) else 0
+            if departure.get('arrival_timestamp', {}).get('scheduled'):
+                arrival = departure.get('arrival_timestamp', {}).get('scheduled', 'T+00:00').split('T')[1].split('+')[
+                              0][:5]
+            else:
+                arrival = departure.get('departure_timestamp', {}).get('scheduled', 'T+00:00').split('T')[1].split('+')[
+                              0][:5]
+            delay = departure.get('delay', {}).get('minutes', 0) if (departure.get('delay', {})
+                                                                     .get('is_available', False)) else 0
             headsign = departure.get('trip', {}).get('headsign', 'N/A').replace(' ', ' ')
             delay = f'+{delay} min'
         else:
